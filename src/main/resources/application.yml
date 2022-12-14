@@ -1,6 +1,6 @@
 # server port ?? ??
 server:
-  port: 8082
+  port: 8084
 
 # data base ?? ??
 spring:
