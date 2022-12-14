@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        #save-form {
+            width: 300px;
+            height: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="save-form">
+    <form action="/member/save" method="post">
+       email <input type="text" name="memberEmail" class="form-control" placeholder="이메일을 입력하세요"><br>
+       password <input type="text" name="memberPassword" placeholder="비밀번호를 입력하세요" class="form-control"><br>
+       name <input type="text" name="memberName" placeholder="이름을 입력하세요" class="form-control"><br>
+       phone <input type="text" name="memberPhone" placeholder="전화번호를 입력하세요" class="form-control"><br>
+        <input type="submit" value="회원가입" class="btn btn-primary">
+    </form>
+</div>
+</body>
+</html>
