@@ -6,6 +6,8 @@ import com.its.memberboard.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -15,5 +17,19 @@ public class MemberService {
         // memberRepository.save(memberEntity);
         Long savedId = memberRepository.save(MemberEntity.toSaveEntity(memberDTO)).getId();
         return savedId;
+    }
+
+    public MemberDTO login(MemberDTO memberDTO) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberDTO.getMemberEmail());
+        if (optionalMemberEntity.isPresent()) {
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            if (memberEntity.getMemberPassword().equals(memberDTO.getMemberPassword())) {
+                return MemberDTO.toDTO(memberEntity);
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }
