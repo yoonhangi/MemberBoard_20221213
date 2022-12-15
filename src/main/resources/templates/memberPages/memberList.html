@@ -7,8 +7,6 @@
     <script th:src="@{/js/jquery.js}"></script>
     <style>
         #list-form {
-            margin-top: 10px;
-            width: 300px;
             height: 300px;
         }
     </style>
@@ -21,6 +19,7 @@
             <th>email</th>
             <th>name</th>
             <th>조회</th>
+            <th>삭제</th>
         </tr>
         <tr th:each="member:${memberList}">
             <td th:text="${member.id}"></td>
@@ -28,6 +27,9 @@
             <td th:text="${member.memberName}"></td>
             <td>
                 <a th:href="@{|/member/${member.id}|}">상세조회</a>
+            </td>
+            <td>
+                <a th:href="@{|/member/delete/${member.id}|}">삭제</a>
             </td>
         </tr>
     </table>
