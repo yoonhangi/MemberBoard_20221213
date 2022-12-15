@@ -48,5 +48,10 @@ public class MemberController {
         return "memberPages/admin";
     }
 
-
+    @GetMapping("/")
+    public String findAll(Model model) {
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "memberPages/memberList";
+    }
 }
