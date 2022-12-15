@@ -10,6 +10,10 @@
         <a href="/member/admin">관리자 페이지</a>
     </div>
     <a href="/member/myPage">마이페이지</a>
+    <a href="/member/logout">로그아웃</a>
+</div>
+<div th:unless="${session.loginEmail}">
+    <a href="/member/login">로그인</a>
 </div>
 </body>
 </html>

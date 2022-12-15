@@ -23,6 +23,16 @@ public class MemberController {
         return "memberPages/memberSave";
     }
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "memberPages/memberLogin";
+    }
+
+    @GetMapping("/main")
+    public String mainPage() {
+        return "memberPages/memberMain";
+    }
+
     @PostMapping("/login")
     public String save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);
@@ -88,5 +98,9 @@ public class MemberController {
     @GetMapping("/myPage")
     public String myPage() {
         return "memberPages/myPage";
+    }
+    @GetMapping("/logout")
+    public String logout() {
+        return "memberPages/memberLogin";
     }
 }
