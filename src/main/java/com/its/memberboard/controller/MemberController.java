@@ -5,12 +5,14 @@ import com.its.memberboard.service.MemberService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -24,13 +26,13 @@ public class MemberController {
         return "memberPages/memberSave";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/login")
     public String save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);
         return "memberPages/memberLogin";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/main")
     public String login(@ModelAttribute MemberDTO memberDTO,  HttpSession session) {
        MemberDTO loginResult = memberService.login(memberDTO);
        if (loginResult != null) {
@@ -40,4 +42,11 @@ public class MemberController {
            return "memberPages/memberLogin";
        }
     }
+
+    @GetMapping("/admin")
+    public String admin() {
+        return "memberPages/admin";
+    }
+
+
 }

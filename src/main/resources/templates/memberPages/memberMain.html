@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>메인페이지</title>
 </head>
 <body>
-
+<div th:if="${session.loginEmail}">
+    <div th:if="${session.loginEmail.toString().equals('admin')}">
+        <a href="/member/admin">관리자 페이지</a>
+    </div>
+</div>
 </body>
 </html>
