@@ -57,4 +57,13 @@ public class MemberService {
             return null;
         }
     }
+
+    public String emailDupCheck(String memberEmail) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmail(memberEmail);
+        if (optionalMemberEntity.isEmpty()) {
+            return "ok";
+        } else {
+            return null;
+        }
+    }
 }

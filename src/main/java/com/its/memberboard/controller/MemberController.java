@@ -58,4 +58,10 @@ public class MemberController {
         model.addAttribute("member", memberDTO);
         return "memberPages/memberDetail";
     }
+
+    @PostMapping("/dup-check")
+    public @ResponseBody String emailDuplicateCheck(@RequestParam("inputEmail") String memberEmail) {
+       String checkResult = memberService.emailDupCheck(memberEmail);
+       return checkResult;
+    }
 }

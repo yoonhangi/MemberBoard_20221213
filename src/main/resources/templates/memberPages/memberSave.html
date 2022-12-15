@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>회원가입 페이지</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.js}"></script>
     <style>
         #save-form {
             width: 300px;
@@ -15,7 +16,8 @@
 <body>
 <div class="container" id="save-form">
     <form action="/member/login" method="post">
-       email <input type="text" name="memberEmail" class="form-control" placeholder="이메일을 입력하세요"><br>
+       email <input type="text" name="memberEmail" id="memberEmail" onblur="emailDuplicateCheck()" class="form-control" placeholder="이메일을 입력하세요"><br>
+        <span id="email-dup-check"></span>
        password <input type="text" name="memberPassword" placeholder="비밀번호를 입력하세요" class="form-control"><br>
        name <input type="text" name="memberName" placeholder="이름을 입력하세요" class="form-control"><br>
        phone <input type="text" name="memberPhone" placeholder="전화번호를 입력하세요" class="form-control"><br>
@@ -23,4 +25,30 @@
     </form>
 </div>
 </body>
+<script th:inline="javascript">
+    const emailDuplicateCheck = () => {
+        const email = document.getElementById("memberEmail").value;
+        const checkResult = document.getElementById("email-dup-check");
+        $.ajax({
+            type: "post",
+            url: "/member/dup-check",
+            data: {
+                inputEmail: email
+            },
+            dataType: "text",
+            success: function (result) {
+                if (result == "ok") {
+                checkResult.innerHTML = "사용가능한 이메일입니다.";
+                checkResult.style.color = "green";
+                } else {
+                    checkResult.innerHTML = "사용중인 이메일입니다.";
+                    checkResult.style.color = "red";
+                }
+            },
+            error: function () {
+                console.log("실패");
+            }
+        });
+    }
+</script>
 </html>
