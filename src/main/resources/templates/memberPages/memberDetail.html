@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>회원 상세정보</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <script th:src="@{/js/jquery.js}"></script>
+  <style>
+    #detail-form {
+      margin-top: 10px;
+      width: 300px;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="detail-form">
+  <table class="table table-hover">
+    <tr>
+      <th>id</th>
+      <td th:text="${member.id}"></td>
+    </tr>
+    <tr>
+      <th>email</th>
+      <td th:text="${member.memberEmail}"></td>
+    </tr>
+    <tr>
+      <th>password</th>
+      <td th:text="${member.memberPassword}"></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td th:text="${member.memberName}"></td>
+    </tr>
+    <tr>
+      <th>phone</th>
+      <td th:text="${member.memberPhone}"></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>
