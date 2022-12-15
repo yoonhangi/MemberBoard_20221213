@@ -43,4 +43,14 @@ public class MemberEntity extends BaseEntity{
         memberEntity.setMemberPhone(memberDTO.getMemberPhone());
         return memberEntity;
     }
+
+    public static MemberEntity toUpdateEntity(MemberDTO memberDTO) {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setId(memberDTO.getId());
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberPhone(memberDTO.getMemberPhone());
+        return memberEntity;
+    }
 }

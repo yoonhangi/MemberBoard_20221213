@@ -64,4 +64,18 @@ public class MemberController {
        String checkResult = memberService.emailDupCheck(memberEmail);
        return checkResult;
     }
+
+    @GetMapping("/update")
+    public String updateForm(Model model, HttpSession session) {
+        String loginEmail = (String) session.getAttribute("loginEmail");
+        MemberDTO memberDTO = memberService.findByMemberEmail(loginEmail);
+        model.addAttribute("member",memberDTO);
+        return "memberPages/memberUpdate";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        memberService.update(memberDTO);
+        return "memberPages/memberMain";
+    }
 }
