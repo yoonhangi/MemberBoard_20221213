@@ -1,5 +1,6 @@
 package com.its.memberboard.entity;
 
+import com.its.memberboard.dto.BoardDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,4 +43,14 @@ public class BoardEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+
+    public static BoardEntity toSaveEntity(BoardDTO boardDTO) {
+        BoardEntity boardEntity = new BoardEntity();
+        boardEntity.setBoardWriter(boardDTO.getBoardWriter());
+        boardEntity.setBoardTitle(boardDTO.getBoardTitle());
+        boardEntity.setBoardContents(boardDTO.getBoardContents());
+        boardEntity.setBoardHits(0);
+        return boardEntity;
+    }
 }

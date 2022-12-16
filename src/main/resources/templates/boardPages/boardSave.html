@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글 작성</title>
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+  <style>
+    #boardSave-form {
+      width: 500px;
+      height: 500px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container" id="boardSave-form">
+  <form action="/board/save" method="post">
+    <input type="text" class="form-control" name="boardWriter" placeholder="작성자">
+    <input type="text" class="form-control" name="boardTitle" placeholder="제목">
+    <textarea name="boardContents" cols="30" rows="10" class="form-control" placeholder="내용을 입력하세요"></textarea>
+    <input type="submit" value="작성" class="btn btn-primary">
+  </form>
+</div>
+</body>
+</html>
