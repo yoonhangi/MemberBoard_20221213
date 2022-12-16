@@ -7,14 +7,15 @@
 <body>
 <div th:if="${session.loginEmail}">
     <div th:if="${session.loginEmail.toString().equals('admin')}">
-        <a href="/member/admin">관리자 페이지</a>
+        <a href="/member/admin" class="btn btn-light">관리자 페이지</a>
     </div>
-    <a href="/member/myPage">마이페이지</a>
-    <a href="/member/logout">로그아웃</a>
-    <a href="/board/save">글 작성</a>
+    <a href="/member/myPage" class="btn btn-primary">마이페이지</a><br>
+    <a href="/member/logout" class="btn btn-danger">로그아웃</a><br>
+    <a href="/board/save" class="btn btn-dark">글 작성</a><br>
+    <a href="/board/" class="btn btn-success">글 목록</a>
 </div>
 <div th:unless="${session.loginEmail}">
-    <a href="/member/login">로그인</a>
+    <a href="/member/login" class="btn btn-primary">로그인</a>
 </div>
 </body>
 </html>
