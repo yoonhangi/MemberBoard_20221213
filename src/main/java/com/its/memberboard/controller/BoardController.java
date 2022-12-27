@@ -4,6 +4,8 @@ import com.its.memberboard.dto.BoardDTO;
 import com.its.memberboard.dto.MemberDTO;
 import com.its.memberboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -57,5 +59,17 @@ public class BoardController {
         BoardDTO boardDTO1 = boardService.findById(boardDTO.getId());
         model.addAttribute("board", boardDTO1);
         return "boardPages/boardDetail";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        boardService.delete(id);
+        return "boardPages/boardDetail";
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteAx(@PathVariable Long id) {
+        boardService.delete(id);
+        return  new ResponseEntity<>(HttpStatus.OK);
     }
 }
