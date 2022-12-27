@@ -48,4 +48,8 @@ public class BoardService {
     }
 
 
+    public void update(BoardDTO boardDTO) {
+        BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
+        boardRepository.save(boardEntity);
+    }
 }

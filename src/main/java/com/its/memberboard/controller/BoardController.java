@@ -1,6 +1,7 @@
 package com.its.memberboard.controller;
 
 import com.its.memberboard.dto.BoardDTO;
+import com.its.memberboard.dto.MemberDTO;
 import com.its.memberboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,8 +22,9 @@ public class BoardController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute BoardDTO boardDTO) {
+    public String save(@ModelAttribute BoardDTO boardDTO, Model model) {
         boardService.save(boardDTO);
+        model.addAttribute("board", boardDTO);
         return "redirect:/member/main";
     }
 
@@ -33,7 +35,6 @@ public class BoardController {
         return "boardPages/boardList";
     }
 
-
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
         boardService.updateHits(id);
@@ -43,5 +44,18 @@ public class BoardController {
 
     }
 
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable Long id, Model model) {
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("board", boardDTO);
+        return "boardPages/boardUpdate";
+    }
 
+    @GetMapping("/update")
+    public String update(@ModelAttribute BoardDTO boardDTO, Model model) {
+        boardService.update(boardDTO);
+        BoardDTO boardDTO1 = boardService.findById(boardDTO.getId());
+        model.addAttribute("board", boardDTO1);
+        return "boardPages/boardDetail";
+    }
 }
