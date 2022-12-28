@@ -1,5 +1,6 @@
 package com.its.memberboard.entity;
 
+import com.its.memberboard.dto.CommentDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,4 +30,12 @@ public class CommentEntity extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private MemberEntity memberEntity;
+
+    public static CommentEntity toSaveEntity(BoardEntity boardEntity, CommentDTO commentDTO) {
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setCommentWriter(commentDTO.getCommentWriter());
+        commentEntity.setCommentContents(commentDTO.getCommentContents());
+        commentEntity.setBoardEntity(boardEntity);
+        return commentEntity;
+    }
 }
