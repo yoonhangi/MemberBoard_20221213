@@ -3,8 +3,10 @@ package com.its.memberboard.service;
 import com.its.memberboard.dto.BoardDTO;
 import com.its.memberboard.entity.BoardEntity;
 import com.its.memberboard.entity.BoardFileEntity;
+import com.its.memberboard.entity.MemberEntity;
 import com.its.memberboard.repository.BoardFileRepository;
 import com.its.memberboard.repository.BoardRepository;
+import com.its.memberboard.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,13 +28,15 @@ import java.util.Optional;
 public class BoardService {
     private final BoardRepository boardRepository;
     private final BoardFileRepository boardFileRepository;
+    private final MemberRepository memberRepository;
 
     public Long save(BoardDTO boardDTO) throws IOException {
+        MemberEntity memberEntity = memberRepository.findByMemberEmail(boardDTO.getBoardWriter()).get();
         if (boardDTO.getBoardFile().get(0).isEmpty()) {
-            BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO);
+            BoardEntity boardEntity = BoardEntity.toSaveEntity(boardDTO, memberEntity);
             return boardRepository.save(boardEntity).getId();
         } else {
-            BoardEntity boardEntity = BoardEntity.toSaveFileEntity(boardDTO);
+            BoardEntity boardEntity = BoardEntity.toSaveFileEntity(boardDTO, memberEntity);
             Long savedId = boardRepository.save(boardEntity).getId();
             BoardEntity entity = boardRepository.findById(savedId).get();
             for (MultipartFile boardFile: boardDTO.getBoardFile()) {
@@ -77,7 +81,8 @@ public class BoardService {
 
 
     public void update(BoardDTO boardDTO) {
-        BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO);
+        MemberEntity memberEntity = memberRepository.findByMemberEmail(boardDTO.getBoardWriter()).get();
+        BoardEntity boardEntity = BoardEntity.toUpdateEntity(boardDTO, memberEntity);
         boardRepository.save(boardEntity);
     }
 
@@ -98,5 +103,21 @@ public class BoardService {
                 )
         );
         return boardList;
+    }
+
+    public List<BoardDTO> search(String type, String q) {
+        List<BoardDTO> boardDTOList = new ArrayList<>();
+        List<BoardEntity> boardEntityList = null;
+        if (type.equals("boardWriter")) {
+            boardEntityList = boardRepository.findByBoardWriterContainingOrderByIdDesc(q);
+        } else if (type.equals("boardTitle")) {
+            boardEntityList = boardRepository.findByBoardTitleContainingOrderByIdDesc(q);
+        } else {
+            boardEntityList = boardRepository.findByBoardTitleContainingOrBoardWriterContainingOrderByIdDesc(q , q);
+        }
+        for (BoardEntity boardEntity: boardEntityList) {
+            boardDTOList.add(BoardDTO.toDTO(boardEntity));
+        }
+        return boardDTOList;
     }
 }

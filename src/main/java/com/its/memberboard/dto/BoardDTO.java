@@ -63,8 +63,8 @@ public class BoardDTO {
 
     public BoardDTO (Long id, String boardTitle, String boardWriter, LocalDateTime boardCreatedTime, int boardHits) {
         this.id = id;
-        this.boardWriter = boardWriter;
         this.boardTitle = boardTitle;
+        this.boardWriter = boardWriter;
         this.boardCreatedTime = boardCreatedTime;
         this.boardHits = boardHits;
     }

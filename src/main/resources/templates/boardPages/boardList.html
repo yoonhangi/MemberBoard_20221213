@@ -13,6 +13,7 @@
   </style>
 <head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
 <div class="container" id="board-list">
   <table class="table table-striped table-hover text-center">
     <tr>
@@ -30,5 +31,6 @@
       <td th:text="${board.boardHits}"></td>
     </tr>
   </table>
+</div>
 </body>
 </html>

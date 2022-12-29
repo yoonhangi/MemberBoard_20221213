@@ -6,6 +6,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
+<th:block th:replace="commonPages/header :: header"></th:block>
 <div th:if="${session.loginEmail}">
     <div th:if="${session.loginEmail.toString().equals('admin')}">
         <a href="/member/admin" class="btn btn-light">관리자 페이지</a>
