@@ -54,7 +54,7 @@
 <div class="container mt-5" id="comment-write">
   <div class="input-group-sm mb-3">
     <div class="form-floating">
-      <input type="text" id="commentWriter" class="form-control" placeholder="작성자">
+      <input type="text" id="commentWriter" class="form-control" th:value="${session.loginEmail}"readonly>
       <label for="commentWriter">작성자</label>
     </div>
     <div class="form-floating">
