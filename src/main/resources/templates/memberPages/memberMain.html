@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>메인페이지</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
 </head>
 <body>
 <div th:if="${session.loginEmail}">
@@ -12,7 +13,7 @@
     <a href="/member/myPage" class="btn btn-primary">마이페이지</a><br>
     <a href="/member/logout" class="btn btn-danger">로그아웃</a><br>
     <a href="/board/save" class="btn btn-dark">글 작성</a><br>
-    <a href="/board/" class="btn btn-success">글 목록</a>
+    <a href="/board" class="btn btn-success">글 목록</a>
 </div>
 <div th:unless="${session.loginEmail}">
     <a href="/member/login" class="btn btn-primary">로그인</a>
