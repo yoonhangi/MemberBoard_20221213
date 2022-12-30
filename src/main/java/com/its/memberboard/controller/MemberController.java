@@ -24,7 +24,8 @@ public class MemberController {
     }
 
     @GetMapping("/login")
-    public String loginPage() {
+    public String loginPage(@RequestParam(value = "redirectURL", defaultValue = "/member/main") String redirectURL, Model model) {
+        model.addAttribute("redirect", redirectURL);
         return "memberPages/memberLogin";
     }
 
@@ -33,18 +34,18 @@ public class MemberController {
         return "memberPages/memberMain";
     }
 
-    @PostMapping("/login")
+    @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
         memberService.save(memberDTO);
         return "memberPages/memberLogin";
     }
 
-    @PostMapping("/main")
-    public String login(@ModelAttribute MemberDTO memberDTO,  HttpSession session) {
+    @PostMapping("/login")
+    public String login(@ModelAttribute MemberDTO memberDTO,  HttpSession session, @RequestParam(value = "redirectURL", defaultValue = "/member/main") String redirectURL) {
        MemberDTO loginResult = memberService.login(memberDTO);
        if (loginResult != null) {
            session.setAttribute("loginEmail", memberDTO.getMemberEmail());
-           return "memberPages/memberMain";
+           return "redirect:" + redirectURL;
        } else {
            return "memberPages/memberLogin";
        }
@@ -100,7 +101,8 @@ public class MemberController {
         return "memberPages/myPage";
     }
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(HttpSession session) {
+        session.invalidate();
         return "memberPages/memberLogin";
     }
 }

@@ -15,7 +15,8 @@
 <body>
 <th:block th:replace="commonPages/header :: header"></th:block>
 <div class="container" id="login-form">
-    <form action="/member/main" method="post">
+    <form action="/member/login" method="post">
+            <input type="hidden" name="redirectURL" th:value="${redirectURL}">
         아이디 <input type="text" name="memberEmail" placeholder="이메일을 입력하세요" class="form-control"><br>
         비밀번호 <input type="passowrd" name="memberPassword" placeholder="비밀번호를 입력하세요" class="form-control">
         <input type="submit" value="로그인" class="btn btn-success">

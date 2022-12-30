@@ -16,7 +16,7 @@
 <body>
 <th:block th:replace="commonPages/header :: header"></th:block>
 <div class="container" id="save-form">
-    <form action="/member/login" method="post">
+    <form action="/member/save" method="post">
        email <input type="text" name="memberEmail" id="memberEmail" onblur="emailDuplicateCheck()" class="form-control" placeholder="이메일을 입력하세요"><br>
         <span id="email-dup-check"></span>
        password <input type="text" name="memberPassword" placeholder="비밀번호를 입력하세요" class="form-control"><br>
