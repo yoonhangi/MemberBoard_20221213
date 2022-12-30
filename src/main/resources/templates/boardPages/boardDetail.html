@@ -43,9 +43,17 @@
   </table>
 
   <div class="container">
-    <button class="btn btn-primary" onclick="listReq()">목록</button>
+    <div th:if="${board.getBoardWriter() == session.loginEmail}">
+      <button class="btn btn-primary" onclick="listReq()">목록</button>
     <button class="btn btn-primary" onclick="req('update')">수정</button>
     <button class="btn btn-danger" onclick="req('delete')">삭제</button>
+    </div>
+    <div th:unless="${board.getBoardWriter() == session.loginEmail}">
+      <button class="btn btn-primary" onclick="listReq()">목록</button>
+    </div>
+    <div th:if="${session.loginEmail.toString().equals('admin')}">
+      <button class="btn btn-danger" onclick="req('delete')">삭제</button>
+    </div>
   </div>
   <div id="pass-check">
   </div>
